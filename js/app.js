@@ -121,9 +121,12 @@
     });
   }
 
-  function normalize(s) {
-    return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
-  }
+    function normalize(s) {
+      return String(s).toLowerCase().normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9\u3400-\u4dbf\u4e00-\u9fff]+/g, ' ')
+        .trim();
+    }
 
   // Pokémon GO icon for a species id, or '' when there is none. Decorative: the name is always
   // next to it, so alt is empty. Shadow forms share the normal icon and get a purple glow.
@@ -187,23 +190,25 @@
       active = -1;
     }
 
-    function search(query) {
-      var ctx = contexts[state.league];
-      var q = normalize(query);
-      if (!ctx || !q) return [];
-      var other = state.picks[1 - slot];
-      var otherDex = other && ctx.byId[other] ? ctx.byId[other].pokemon.dex : null;
-      var starts = [], contains = [];
-      ctx.ranked.forEach(function (e) {
-        if (e.pokemon.dex === otherDex) return;
-        var name = normalize(e.pokemon.name);
-        var nick = (e.pokemon.nicknames || []).some(function (n) { return normalize(n).indexOf(q) === 0; });
-        if (name.indexOf(q) === 0 || nick) starts.push(e);
-        else if (name.indexOf(q) !== -1) contains.push(e);
-      });
-      // ctx.ranked is already in ranking order, so each group stays best-first.
-      return starts.concat(contains).slice(0, MAX_MATCHES);
-    }
+      function search(query) {
+        var ctx = contexts[state.league];
+        var q = normalize(query);
+        if (!ctx || !q) return [];
+        var other = state.picks[1 - slot];
+        var otherDex = other && ctx.byId[other] ? ctx.byId[other].pokemon.dex : null;
+        var starts = [], contains = [];
+        ctx.ranked.forEach(function (e) {
+          if (e.pokemon.dex === otherDex) return;
+          var name = normalize(e.pokemon.name);   // 中文名，如 "泥巴鱼 伽勒尔"
+          var eng  = normalize(e.id);             // 英文 id，如 "stunfisk galarian"
+          var nick = (e.pokemon.nicknames || []).some(function (n) {
+            return normalize(n).indexOf(q) === 0;
+          });
+          if (name.indexOf(q) === 0 || eng.indexOf(q) === 0 || nick) starts.push(e);
+          else if (name.indexOf(q) !== -1 || eng.indexOf(q) !== -1) contains.push(e);
+        });
+        return starts.concat(contains).slice(0, MAX_MATCHES);
+      }
 
     function renderList() {
       if (!matches.length) {
