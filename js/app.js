@@ -6,7 +6,7 @@
   var STYLES = ['abc', 'pair', 'any'];
   // Styles that were merged into another; old saved state and shared links still work.
   var STYLE_ALIASES = { abb: 'pair', aba: 'pair' };
-  var LEAGUE_NAMES = { great: 'Great League', ultra: 'Ultra League', master: 'Master League' };
+  var LEAGUE_NAMES = { great: '超級聯盟', ultra: '高級聯盟', master: '大師聯盟' };
   // The 'any' value is kept (saved state and shared links use it); only the label changed.
   var STYLE_NAMES = { abc: 'ABC', pair: 'Shared type', any: 'Best score' };
   var STYLE_HINTS = { abc: 'ABC style', pair: 'shared type style (ABB / ABA)', any: 'best score (no typing rule)' };
@@ -320,7 +320,7 @@
     if (!ctx || currentPicks().length === 2) { el.innerHTML = ''; return; }
     var taken = currentPicks().map(function (id) { return ctx.byId[id].pokemon.dex; });
     var top = ctx.ranked.filter(function (e) { return taken.indexOf(e.pokemon.dex) === -1; }).slice(0, QUICK_PICKS);
-    el.innerHTML = '<span class="quick-label">Popular in ' + LEAGUE_NAMES[state.league] + ':</span> ' +
+    el.innerHTML = '<span class="quick-label">hot in ' + LEAGUE_NAMES[state.league] + ':</span> ' +
       top.map(function (e) {
         return '<button type="button" class="chip" data-id="' + escapeHtml(e.id) + '">' + escapeHtml(e.pokemon.name) + '</button>';
       }).join('');
@@ -357,7 +357,7 @@
         teams = [];
         described = [];
         showMessage((notice ? escapeHtml(notice) + ' ' : '') +
-          'Pick a Pokémon above to get team suggestions for ' + LEAGUE_NAMES[league] + '.');
+          '選擇寶可夢，即可獲得組隊建議 /  ' + LEAGUE_NAMES[league] + '.');
         return;
       }
       showMessage('Finding the best teams…');
@@ -387,7 +387,7 @@
   function renderTeams(ctx, notice) {
     described = teams.map(function (t) { return window.Engine.describeTeam(ctx, t); });
     var picks = currentPicks();
-    var heading = picks.length === 1 ? 'Best partners for ' + escapeHtml(ctx.byId[picks[0]].pokemon.name)
+    var heading = picks.length === 1 ? '最佳搭檔 for ' + escapeHtml(ctx.byId[picks[0]].pokemon.name)
       : 'Best third for ' + escapeHtml(ctx.byId[picks[0]].pokemon.name) + ' and ' + escapeHtml(ctx.byId[picks[1]].pokemon.name);
 
     var list = described.map(function (d, i) {
@@ -481,8 +481,8 @@
       '</strong> Pokémon in the league.' + layoutNote + '</p>' +
       '<div class="members">' + members + '</div>' +
       '<div class="report">' +
-      '<section><h3>Top strengths</h3><p class="hint">Top-30 meta threats this team beats most easily.</p>' + threatList(d.strengths, true) + '</section>' +
-      '<section><h3>Top weaknesses</h3><p class="hint">Top-30 meta threats with the team’s closest matchups, even if it still wins them.</p>' + threatList(d.weaknesses, false) + shared + '</section>' +
+      '<section><h3>全面克制</h3><p class="hint">Top-30 meta threats this team beats most easily.</p>' + threatList(d.strengths, true) + '</section>' +
+      '<section><h3>頭部威脅</h3><p class="hint">Top-30 meta threats with the team’s closest matchups, even if it still wins them.</p>' + threatList(d.weaknesses, false) + shared + '</section>' +
       '</div>';
   }
 
