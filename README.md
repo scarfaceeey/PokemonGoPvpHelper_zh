@@ -9,7 +9,7 @@ current meta.
 
 ## Status
 
-Live at **https://jesusnm4.github.io/PokemonGoPvpHelper/**. Pick a league, a team style and one or
+Live at **https://scarfaceeey.github.io/PokemonGoPvpHelper_zh/**. Pick a league, a team style and one or
 two Pokémon to get suggested teams, share them as a link, and check your own Pokémon's IVs. See
 [PLAN.md](PLAN.md) for the design and milestones.
 
