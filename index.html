@@ -26,9 +26,9 @@
       <fieldset>
         <legend>League</legend>
         <div class="segmented">
-          <label><input type="radio" name="league" value="great"> Great <small>1500</small></label>
-          <label><input type="radio" name="league" value="ultra"> Ultra <small>2500</small></label>
-          <label><input type="radio" name="league" value="master"> Master <small>no cap</small></label>
+          <label><input type="radio" name="league" value="great"> 超級聯盟 <small>1500</small></label>
+          <label><input type="radio" name="league" value="ultra"> 高級聯盟 <small>2500</small></label>
+          <label><input type="radio" name="league" value="master"> 大師聯盟 <small>no cap</small></label>
         </div>
       </fieldset>
 
@@ -43,22 +43,22 @@
 
       <fieldset>
         <legend>Your Pokémon</legend>
-        <p class="hint">Pick one and get two partners, or pick two and get the best third.</p>
+        <p class="hint">选一只，找两个搭子，或者选两只，找最棒的第三者。</p>
         <div class="picks">
           <div class="combo" data-slot="0">
-            <label for="pick-0">First Pokémon</label>
+            <label for="pick-0">第一只宝可梦</label>
             <div class="combo-box">
               <input id="pick-0" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false"
-                aria-controls="pick-0-list" autocomplete="off" spellcheck="false" placeholder="Search, e.g. Medicham">
+                aria-controls="pick-0-list" autocomplete="off" spellcheck="false" placeholder="搜索宝可梦.中英皆可. 恰雷姆 (Medicham)">
               <button type="button" class="clear" data-action="clear" aria-label="Clear first Pokémon" hidden>×</button>
             </div>
             <ul class="combo-list" id="pick-0-list" role="listbox" aria-label="Matching Pokémon" hidden></ul>
           </div>
           <div class="combo" data-slot="1">
-            <label for="pick-1">Second Pokémon <small>(optional)</small></label>
+            <label for="pick-1">第二只宝可梦 <small>(optional)</small></label>
             <div class="combo-box">
               <input id="pick-1" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false"
-                aria-controls="pick-1-list" autocomplete="off" spellcheck="false" placeholder="Search, e.g. Azumarill">
+                aria-controls="pick-1-list" autocomplete="off" spellcheck="false" placeholder="搜索宝可梦.中英皆可. 瑪力露麗 (Azumarill)">
               <button type="button" class="clear" data-action="clear" aria-label="Clear second Pokémon" hidden>×</button>
             </div>
             <ul class="combo-list" id="pick-1-list" role="listbox" aria-label="Matching Pokémon" hidden></ul>
