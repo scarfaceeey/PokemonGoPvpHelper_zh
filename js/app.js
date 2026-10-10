@@ -450,7 +450,7 @@
         '<p class="role">' + ROLE_NAMES[m.role] + '</p>' +
         '<h3>' + escapeHtml(m.name) + '</h3>' +
         '<p class="types">' + typeChips(m.types) + '</p>' +
-        '<p class="pvp-rank"><a href="https://pvpoke.com/rankings/all/' + LEAGUE_CP[state.league] + '/overall/' +
+        '<p class="pvp-rank"><a href="https://pvpoketw.com/rankings/all/' + LEAGUE_CP[state.league] + '/overall/' +
         encodeURIComponent(m.id) + '/" target="_blank" rel="noopener" title="Open in PvPoke">PvPoke #' + m.rank + '</a>' +
         ' <small>of ' + m.rankedCount + ' · score ' + m.rankScore.toFixed(1) + '</small></p>' +
         '</div></div>' +
@@ -471,10 +471,10 @@
     }
 
     var shared = d.sharedWeaknesses.length
-      ? '<p class="shared">Shared weaknesses: ' + d.sharedWeaknesses.map(function (w) {
+      ? '<p class="shared">提防雙剋: ' + d.sharedWeaknesses.map(function (w) {
           return typeChips([w.type]) + ' <small>hits ' + w.count + '</small>';
         }).join(' ') + '</p>'
-      : '<p class="shared">No type hits two members super-effectively.</p>';
+      : '<p class="shared">沒有屬性能對兩名成員產生超強壓制. </p>';
 
     var layoutNote = LAYOUT_NOTES[d.layout] ? ' Layout <strong>' + d.layout + '</strong>: ' + LAYOUT_NOTES[d.layout] + '.' : '';
     return '<p class="coverage">Has a winning answer to <strong>' + d.beats + ' of the top ' + d.threatCount +
