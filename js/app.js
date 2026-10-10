@@ -481,7 +481,7 @@
       '</strong> Pokémon in the league.' + layoutNote + '</p>' +
       '<div class="members">' + members + '</div>' +
       '<div class="report">' +
-      '<section><h3>全面克制</h3><p class="hint">Top-30 meta threats this team beats most easily.</p>' + threatList(d.strengths, true) + '</section>' +
+      '<section><h3>全面剋制</h3><p class="hint">Top-30 meta threats this team beats most easily.</p>' + threatList(d.strengths, true) + '</section>' +
       '<section><h3>頭部威脅</h3><p class="hint">Top-30 meta threats with the team’s closest matchups, even if it still wins them.</p>' + threatList(d.weaknesses, false) + shared + '</section>' +
       '</div>';
   }
