@@ -9,9 +9,10 @@ current meta.
 
 ## Status
 
-Live at **https://scarfaceeey.github.io/PokemonGoPvpHelper_zh/**. Pick a league, a team style and one or
-two Pokémon to get suggested teams, share them as a link, and check your own Pokémon's IVs. See
-[PLAN.md](PLAN.md) for the design and milestones.
+線上訪問網址：https://scarfaceeey.github.io/PokemonGoPvpHelper_zh/
+
+選擇對戰聯盟、隊伍風格以及一到兩隻寶可夢，即可取得推薦陣容；您可以產生連結分享陣容，並查看自己寶可夢的個體值（IV）。有關設計方案與開發里程碑，請參閱 PLAN.md。
+
 
 | Milestone | State |
 | --- | --- |
