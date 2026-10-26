@@ -53,7 +53,7 @@
       function () { return {}; });
   };
 
-  // league: 'great' | 'ultra' | 'master'. Resolves to the ranked list, best first.
+  // league: 'great' | 'ultra' | 'master' | 'fantasy'. Resolves to the ranked list, best first.
   PvpData.rankings = function (league) {
     var key = 'rankings-' + league;
     return loadScript(key, 'data/' + key + '.js');

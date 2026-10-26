@@ -39,6 +39,10 @@ milestones live in `PLAN.md`.
   (`#l=&s=&p=&t=`, see `hashFor`/`readHash` in `app.js`). A hash on load wins over saved state.
   Any new persisted field goes through `applySaved` validation. Team style values are `abc`,
   `pair`, `any`; retired values (`abb`, `aba`) are mapped in `STYLE_ALIASES` so old links work.
+- Formats: `great`, `ultra`, `master`, `fantasy`. Adding a cup means one entry each in
+  `LEAGUES` (`scripts/update_data.py`, as (PvPoke cup, CP, min entries, required)), `Engine.LEAGUES`,
+  `LEAGUES`/`LEAGUE_NAMES`/`LEAGUE_CP`/`LEAGUE_CUP` in `app.js`, the radio in `index.html`, and the
+  league lists in `update_images.py`, `run-tests.js`, `tests.html` and `engine.test.js`.
 - Wrap all `localStorage` access in try/catch, and re-validate persisted fields in `load()`.
 - Keep the README's status table and `PLAN.md` milestones current with each milestone. The user
   asked for the README to be kept up to date as the project grows.

@@ -9,17 +9,25 @@ Standard library only. Run from anywhere:  python3 scripts/update_data.py
 import json
 import os
 import sys
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
 SOURCE = "https://raw.githubusercontent.com/pvpoke/pvpoke/master/src/data"
-LEAGUES = {"great": 1500, "ultra": 2500, "master": 10000}
+# Site format id -> (PvPoke cup, CP cap, minimum ranked entries for a sane file, required).
+# Cups come and go on PvPoke; an optional one that disappears upstream keeps its last snapshot
+# instead of failing the whole refresh.
+LEAGUES = {
+    "great": ("all", 1500, 300, True),
+    "ultra": ("all", 2500, 300, True),
+    "master": ("all", 10000, 300, True),
+    "fantasy": ("fantasy", 1500, 100, False),
+}
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 
 # Guards against writing a broken snapshot if upstream changes shape or serves an error page.
 MIN_POKEMON = 1000
 MIN_MOVES = 250
-MIN_RANKED = 300
 
 POKEMON_TAGS = {"shadow", "shadoweligible", "legendary", "mythical", "ultrabeast", "untradeable", "wildlegendary"}
 MOVE_FIELDS = ("moveId", "name", "type", "power", "energy", "energyGain", "turns",
@@ -96,11 +104,10 @@ def trim_ranking(r):
     }
 
 
-def trim_rankings(rankings, known_ids):
+def trim_rankings(rankings, known_ids, minimum):
+    """Trimmed entries, or None if there are fewer than `minimum` (upstream looks broken)."""
     out = [trim_ranking(r) for r in rankings if r["speciesId"] in known_ids]
-    if len(out) < MIN_RANKED:
-        sys.exit("rankings look wrong: only %d entries" % len(out))
-    return out
+    return out if len(out) >= minimum else None
 
 
 def write_js(name, key, value):
@@ -118,8 +125,22 @@ def main():
     known_ids = {p["id"] for p in gamemaster["pokemon"]}
 
     rankings = {}
-    for league, cp in LEAGUES.items():
-        rankings[league] = trim_rankings(fetch_json("rankings/all/overall/rankings-%d.json" % cp), known_ids)
+    for league, (cup, cp, minimum, required) in LEAGUES.items():
+        path = "rankings/%s/overall/rankings-%d.json" % (cup, cp)
+        try:
+            entries = trim_rankings(fetch_json(path), known_ids, minimum)
+        except (urllib.error.HTTPError, ValueError) as e:
+            entries, reason = None, str(e)
+        else:
+            reason = "fewer than %d ranked entries" % minimum
+        if entries is not None:
+            rankings[league] = entries
+        elif required:
+            sys.exit("%s rankings look wrong (%s): %s" % (league, path, reason))
+        elif os.path.exists(os.path.join(OUT_DIR, "rankings-%s.js" % league)):
+            print("warning: %s rankings unavailable (%s); keeping the previous snapshot" % (league, reason))
+        else:
+            print("warning: %s rankings unavailable (%s); skipping" % (league, reason))
 
     write_js("gamemaster.js", "gamemaster", gamemaster)
     for league, entries in rankings.items():

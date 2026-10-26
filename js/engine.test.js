@@ -219,7 +219,7 @@
   }
   var gm = { pokemonById: index(raw.gamemaster.pokemon, 'id'), movesById: index(raw.gamemaster.moves, 'moveId') };
 
-  ['great', 'ultra', 'master'].forEach(function (league) {
+  ['great', 'ultra', 'master', 'fantasy'].forEach(function (league) {
     test(league + ' league with real data', function () {
       var ctx = E.createContext(gm, raw['rankings-' + league], league);
       var cap = E.LEAGUES[league];
@@ -261,6 +261,13 @@
       ok(league + ': beats counts winning answers among the 100 threats', d.threatCount === 100 &&
         d.beats <= 100 && (d.weaknesses[0].rating > 500 || d.beats < 100), d.beats + '/' + d.threatCount);
     });
+  });
+
+  test('fantasy cup only ranks Dragon, Steel and Fairy types', function () {
+    var bad = raw['rankings-fantasy'].filter(function (r) {
+      return !gm.pokemonById[r.id].types.some(function (t) { return ['dragon', 'steel', 'fairy'].indexOf(t) !== -1; });
+    });
+    eq('every ranked Pokémon is eligible', bad.map(function (r) { return r.id; }), []);
   });
 
   test('suggest rejects bad input', function () {

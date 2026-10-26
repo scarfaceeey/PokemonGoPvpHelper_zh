@@ -25,7 +25,7 @@ current meta.
 
 ## Features
 
-- Great (1500), Ultra (2500) and Master League
+- Great (1500), Ultra (2500) and Master League, plus Fantasy Cup (1500, Dragon / Steel / Fairy only)
 - Team styles: ABC (balanced, no shared types), Shared type (two members share a type, as ABB or
   ABA), or Best score (no typing rule); each suggested team is tagged with its layout
 - Pokémon search by name or nickname (shadow forms included), plus one-tap popular picks
@@ -54,7 +54,8 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 Teams are scored with a simplified battle simulator: every Pokémon at its rank-1 IVs with PvPoke's
 recommended moveset, battling each of the top 100 Pokémon in the league with 0, 1 and 2 shields.
-It agrees with PvPoke's own results on the winner about 84% of the time. Suggestions favour teams
+It agrees with PvPoke's own results on the winner about 84% of the time in the open leagues and
+90% in Fantasy Cup. Suggestions favour teams
 whose members cover each other's losses and don't share weaknesses. Details in [PLAN.md](PLAN.md).
 
 ## Tests
@@ -71,7 +72,8 @@ committing new data.
 ## Data
 
 `data/` holds a trimmed snapshot of PvPoke's game master and overall rankings for Great, Ultra and
-Master League. The **Update PvPoke data** GitHub Action refreshes it every Monday and commits only
+Master League and Fantasy Cup. Cups are listed in `LEAGUES` in `scripts/update_data.py`; if PvPoke
+stops publishing a cup's rankings, the refresh keeps the last snapshot instead of failing. The **Update PvPoke data** GitHub Action refreshes it every Monday and commits only
 when something changed. To run it now: **Actions → Update PvPoke data → Run workflow**. To refresh
 locally (Python 3, no dependencies):
 

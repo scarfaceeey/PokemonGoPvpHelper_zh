@@ -121,6 +121,9 @@ tests.html     runs js/engine.test.js in the browser (scripts/run-tests.js runs 
 6. **Pokémon images:** Pokémon GO icons copied into `img/pokemon/` (trimmed, 128 px WebP) by
    `scripts/update_images.py`, refreshed by the weekly Action; shown in team cards, the team list,
    search results and threat lists, with a purple glow for shadows. ✅
+8. **Fantasy Cup:** PvPoke cup `fantasy` (1,500 CP, Dragon / Steel / Fairy only) as a fourth
+   format next to the leagues. Same engine; its own rankings file. Simulator agreement with
+   PvPoke's listed 1-1 results: 90%. ✅
 7. **Later (optional):** closer simulator accuracy (chance buffs, Aegislash, Morpeko, smarter
    shielding), and limited-format cups.
 

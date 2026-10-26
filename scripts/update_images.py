@@ -30,7 +30,7 @@ OUT = os.path.join(ROOT, "img", "pokemon")
 SIZE = 128
 # Bump when convert() changes, so every icon is regenerated once.
 FORMAT = 2
-LEAGUES = ("great", "ultra", "master")
+LEAGUES = ("great", "ultra", "master", "fantasy")
 
 # PvPoke id token -> Pokémon GO form name, where they differ.
 ALIAS = {"alolan": "ALOLA", "galarian": "GALARIAN", "hisuian": "HISUIAN", "paldean": "PALDEA"}
@@ -41,7 +41,7 @@ OVERRIDES = {
     "basculin": "RED_STRIPED", "deerling": "SPRING", "sawsbuck": "SPRING",
     "floette": "RED", "florges": "RED", "furfrou": "NATURAL",
     "shellos": "WEST_SEA", "gastrodon": "WEST_SEA", "genesect": "NORMAL", "kyurem": "NORMAL",
-    "maushold": "FAMILY_OF_THREE", "mimikyu": "DISGUISED", "spinda": "00",
+    "maushold": "FAMILY_OF_THREE", "mimikyu": "DISGUISED", "minior_core": "RED", "spinda": "00",
     "squawkabilly": "GREEN", "toxtricity": "AMPED", "unown": "UNOWN_F", "vivillon": "MEADOW",
     "meowstic": "", "mewtwo_armored": "A", "oricorio_pom_pom": "POMPOM",
     "tauros_aqua": "PALDEA_AQUA", "tauros_blaze": "PALDEA_BLAZE", "tauros_combat": "PALDEA_COMBAT",

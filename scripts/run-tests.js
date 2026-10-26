@@ -9,7 +9,7 @@ var vm = require('vm');
 var root = path.join(__dirname, '..');
 globalThis.window = globalThis;
 
-['data/gamemaster.js', 'data/rankings-great.js', 'data/rankings-ultra.js', 'data/rankings-master.js',
+['data/gamemaster.js', 'data/rankings-great.js', 'data/rankings-ultra.js', 'data/rankings-master.js', 'data/rankings-fantasy.js',
   'js/engine.js', 'js/engine.test.js'].forEach(function (file) {
   vm.runInThisContext(fs.readFileSync(path.join(root, file), 'utf8'), { filename: file });
 });
@@ -27,7 +27,7 @@ var results = window.EngineTests.results;
   var map = window.PvpData.raw.images.map;
   // Only the top 100 must have icons: a brand-new Pokémon lower down without an icon yet should not
   // block the weekly data refresh (it just shows without an image), but it is listed.
-  ['great', 'ultra', 'master'].forEach(function (league) {
+  ['great', 'ultra', 'master', 'fantasy'].forEach(function (league) {
     var unmapped = window.PvpData.raw['rankings-' + league].map(function (r, i) { return { id: r.id, rank: i + 1 }; })
       .filter(function (r) { return !map[r.id]; });
     var top = unmapped.filter(function (r) { return r.rank <= 100; });
